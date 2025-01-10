@@ -647,7 +647,6 @@ section,
   background-color: var(--surface-color);
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  border-radius: 15px; /* Define cantos arredondados */
 }
 
 .about .skills-content h5 {
@@ -713,11 +712,6 @@ section,
 
 .about .about-me p {
   font-size: 18px;
-}
-
-.about img {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 10px 20px rgba(0, 0, 0, 0.3);
-  border-radius: 10px; /* Mantém os cantos arredondados */
 }
 
 /*--------------------------------------------------------------

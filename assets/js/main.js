@@ -260,3 +260,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const viewPdfButton = document.getElementById("viewPdfButton");
+
+  if (viewPdfButton) {
+    viewPdfButton.addEventListener("click", function () {
+      // Substitua pelo caminho do seu arquivo PDF
+      const pdfUrl = "assets/pdf/cv.pdf";
+
+      // Abre o PDF em uma nova aba
+      window.open(pdfUrl, "_blank");
+    });
+  }
+});

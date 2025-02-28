@@ -1538,6 +1538,21 @@ section,
   color: var(--accent-color);
 }
 
+#viewPdfButton {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#viewPdfButton:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
+
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/

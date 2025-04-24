@@ -62,15 +62,37 @@
    * Preloader
    */
   const preloader = document.querySelector('#preloader');
+  const video = document.querySelector('#preloader-video');
+  const canvas = document.querySelector('#preloader-canvas');
+  const context = canvas.getContext('2d');
+  
   if (preloader) {
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        preloader.classList.add('fade-out'); // Adiciona a classe para iniciar o fade-out
-        setTimeout(() => {
-          preloader.remove(); // Remove após o fade-out terminar
-        }, 500); // Espera 500ms (0.5s) para corresponder à transição CSS
-      }, 3000); // 2000 milissegundos = 2 segundos (tempo mínimo de exibição)
-    });
+      document.body.classList.add('no-scroll');
+  
+      window.addEventListener('load', () => {
+          // Tenta desenhar o primeiro frame do vídeo no canvas (pode não funcionar em todos os navegadores)
+          try {
+              context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          } catch (e) {
+              // Se falhar, mantém o fundo padrão do canvas
+          }
+  
+          setTimeout(() => {
+              preloader.classList.add('fade-out');
+              setTimeout(() => {
+                  preloader.remove();
+                  document.body.classList.remove('no-scroll');
+              }, 500);
+          }, 3000);
+      });
+  
+      // Atualiza o tamanho do canvas para corresponder ao vídeo
+      function resizeCanvas() {
+          canvas.width = video.clientWidth;
+          canvas.height = video.clientHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
   }
 
   /**

@@ -64,7 +64,12 @@
   const preloader = document.querySelector('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
-      preloader.remove();
+      setTimeout(() => {
+        preloader.classList.add('fade-out'); // Adiciona a classe para iniciar o fade-out
+        setTimeout(() => {
+          preloader.remove(); // Remove após o fade-out terminar
+        }, 500); // Espera 500ms (0.5s) para corresponder à transição CSS
+      }, 2500); // 2000 milissegundos = 2 segundos (tempo mínimo de exibição)
     });
   }
 

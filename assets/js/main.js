@@ -69,7 +69,7 @@
         setTimeout(() => {
           preloader.remove(); // Remove após o fade-out terminar
         }, 500); // Espera 500ms (0.5s) para corresponder à transição CSS
-      }, 2500); // 2000 milissegundos = 2 segundos (tempo mínimo de exibição)
+      }, 3000); // 2000 milissegundos = 2 segundos (tempo mínimo de exibição)
     });
   }
 

@@ -417,7 +417,7 @@ h6 {
   inset: 0;
   z-index: 999999;
   overflow: hidden;
-  background: #335179;
+  background: rgb(46, 72, 107);
   transition: opacity 0.5s ease-out;
   opacity: 1;
   display: flex;
@@ -429,14 +429,18 @@ h6 {
   opacity: 0; /* Torna invisível */
 }
 
-#preloader-image {
-  max-width: 70%; /* Defina o tamanho máximo da imagem */
-  max-height: 70%;
-  object-fit: contain;
-  /* Adicione estas linhas para garantir que o vídeo esteja na frente */
-  position: relative; 
-  z-index: 10; 
-  /* Adicione outros estilos conforme necessário (e.g., animação) */
+#preloader video {
+  /* Tamanho mais controlado */
+  width: auto; /* Deixa o vídeo manter a proporção */
+  height: auto;
+  max-width: 210%;  /* Limita a largura a 50% do preloader */
+  max-height: 210%; /* Limita a altura a 50% do preloader */
+  object-fit: contain; /* Garante que o vídeo inteiro caiba */
+  position: absolute; /* Posicionamento absoluto dentro do preloader */
+  top: 50%;         /* Centraliza verticalmente */
+  left: 50%;        /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Ajuste fino do centralizado */
+  z-index: 10;
 }
 
 /* Remova o estilo da roda de carregamento */
@@ -446,8 +450,8 @@ h6 {
 
 @media (max-width: 768px) {
   #preloader video {
-      max-width: 860px; /* Menor ainda em telas muito pequenas */
-      max-height: 860px;
+      max-width: 700px; /* Menor ainda em telas muito pequenas */
+      max-height: 700px;
   }
 }
 

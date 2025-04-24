@@ -65,18 +65,31 @@
   const video = document.querySelector('#preloader-video');
   const canvas = document.querySelector('#preloader-canvas');
   const context = canvas.getContext('2d');
-  
+
   if (preloader) {
       document.body.classList.add('no-scroll');
-  
+
+      function handleVideoError() {
+          console.error("Erro ao carregar o vídeo do preloader.");
+          // Mostra o canvas como fallback garantido
+          canvas.style.display = 'block';
+          video.style.display = 'none'; // Oculta o vídeo
+      }
+
+      video.addEventListener('error', handleVideoError);
+
       window.addEventListener('load', () => {
-          // Tenta desenhar o primeiro frame do vídeo no canvas (pode não funcionar em todos os navegadores)
-          try {
-              context.drawImage(video, 0, 0, canvas.width, canvas.height);
-          } catch (e) {
-              // Se falhar, mantém o fundo padrão do canvas
+          function drawFirstFrame() {
+              try {
+                  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+              } catch (e) {
+                  console.warn("Não foi possível desenhar o primeiro frame:", e);
+              }
           }
-  
+
+          // Tenta desenhar o primeiro frame após um pequeno atraso
+          setTimeout(drawFirstFrame, 500); // Espera 500ms
+
           setTimeout(() => {
               preloader.classList.add('fade-out');
               setTimeout(() => {
@@ -85,12 +98,12 @@
               }, 500);
           }, 3000);
       });
-  
-      // Atualiza o tamanho do canvas para corresponder ao vídeo
+
       function resizeCanvas() {
           canvas.width = video.clientWidth;
           canvas.height = video.clientHeight;
       }
+
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
   }

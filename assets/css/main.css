@@ -441,6 +441,8 @@ h6 {
   left: 50%;        /* Centraliza horizontalmente */
   transform: translate(-50%, -50%); /* Ajuste fino do centralizado */
   z-index: 10;
+  visibility: visible;
+  opacity: 1;
 }
 
 #preloader canvas {

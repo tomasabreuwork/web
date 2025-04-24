@@ -432,6 +432,10 @@ h6 {
 #preloader-image {
   max-width: 70%; /* Defina o tamanho máximo da imagem */
   max-height: 70%;
+  object-fit: contain;
+  /* Adicione estas linhas para garantir que o vídeo esteja na frente */
+  position: relative; 
+  z-index: 10; 
   /* Adicione outros estilos conforme necessário (e.g., animação) */
 }
 

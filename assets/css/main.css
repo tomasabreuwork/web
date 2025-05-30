@@ -74,6 +74,7 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  cursor: none;
 }
 
 a {
@@ -417,7 +418,7 @@ h6 {
   inset: 0;
   z-index: 999999;
   overflow: hidden;
-  background: rgb(46, 72, 107);
+  background: rgb(53, 71, 97);
   transition: opacity 0.5s ease-out;
   opacity: 1;
   display: flex;
@@ -1591,4 +1592,16 @@ section,
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
+}
+
+.cursor {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #387ecf;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+  z-index: 1000;
 }

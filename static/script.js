@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Troca o vídeo de fundo para mobile
+     // Troca o vídeo de fundo para mobile
     const heroVideo = document.querySelector('.hero-video video');
     if (window.innerWidth <= 767) {
         heroVideo.querySelector('source').setAttribute('src', '../static/videos/background_mobile.mp4');

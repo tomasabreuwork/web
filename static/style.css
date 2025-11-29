@@ -1,0 +1,1121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+:root {
+    --primary-color: #333;
+    --secondary-color: #f4f4f4;
+    --text-color: #fff;
+    --hover-glow-color: rgba(255, 255, 255, 0.8);
+    --hover-text-color: #fff;
+    --dark-section-bg: #070707; /* Fundo escuro para a secção Sobre Mim e Experiência */
+    --light-gray-text: #ccc;
+    --navbar-shadow-color: rgba(0, 0, 0, 0.5); /* Cor da sombra para a navbar */
+    --video-overlay-color: rgba(0, 0, 0, 0.6); /* Cor do overlay para vídeos (usado no hero) */
+    --item-line-color: rgba(255, 255, 255, 0.3); /* Cor para a nova linha vertical por item */
+    --box-background: rgba(255, 255, 255, 0.05); /* Fundo sutil para as boxes */
+    --box-border: rgba(255, 255, 255, 0.1); /* Borda sutil para as boxes */
+    /* Cores dos botões ajustadas para preto e cinzento */
+    --button-background-dark: #222;
+    --button-hover-background-dark: #000;
+    --button-background-light: #555;
+    --button-hover-background-light: #333;
+    --popup-bg: rgba(0, 0, 0, 0.85); /* Fundo do overlay da pop-up */
+    --popup-content-bg: #1a1a1a; /* Fundo do conteúdo da pop-up original */
+    --popup-content-paper-color: #282828; /* Novo: Cor para simular papel escuro */
+    --popup-border: rgba(255, 255, 255, 0.2); /* Borda do conteúdo da pop-up */
+    --divider-color: rgba(255, 255, 255, 0.2); /* Cor para a barra de separação */
+
+    /* Novas variáveis para a sombra da navbar */
+    --navbar-scrolled-bg: rgba(0, 0, 0, 0.6); /* Fundo um pouco mais escuro e translúcido */
+    --navbar-scrolled-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Sombra mais difusa e intensa */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    background: var(--primary-color);
+    color: var(--text-color);
+    padding-top: 0;
+    overflow-x: hidden;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 30px;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.navbar {
+    width: 55%;
+    background: transparent;
+    padding: 1rem 0;
+    transition: box-shadow 0.4s ease-out, background-color 0.4s ease-out, border-radius 0.4s ease-out; /* Transições mais suaves */
+    position: relative;
+    z-index: 1001;
+    border-radius: 0; /* Inicia sem border-radius */
+}
+
+/* Esta regra aplicará a sombra e o fundo à largura de 55% da navbar */
+.navbar-shadow {
+    box-shadow: var(--navbar-scrolled-shadow); /* Usa a nova variável de sombra */
+    background-color: var(--navbar-scrolled-bg); /* Usa a nova variável de fundo */
+    border-radius: 10px; /* Arredonda as bordas quando a sombra aparece */
+    backdrop-filter: blur(5px); /* Efeito de desfoque (Blur) para um visual moderno */
+    -webkit-backdrop-filter: blur(5px); /* Suporte para navegadores Webkit */
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    font-size: 1.3em;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.navbar ul li a:hover {
+    color: var(--hover-text-color);
+    text-shadow: 0 0 5px var(--hover-glow-color),
+                 0 0 10px var(--hover-glow-color),
+                 0 0 15px var(--hover-glow-color);
+    background: transparent;
+    border-radius: 0;
+}
+
+.hero-video {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.hero-video video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.about-me-section {
+    position: relative;
+    background-color: var(--dark-section-bg);
+    color: var(--text-color);
+    padding: 100px 5%;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    overflow-x: hidden;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+@media (min-width: 768px) {
+    .about-content {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+.profile-photo {
+    flex-shrink: 0;
+    border-radius: 0;
+    overflow: visible;
+    width: 550px;
+    height: auto;
+    border: none;
+    box-shadow: none;
+    margin-right: 60px;
+    max-width: 90%;
+
+    transform: translateX(-150px);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.profile-photo.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.about-text {
+    flex-grow: 1;
+    max-width: 600px;
+
+    transform: translateX(150px);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
+    transition-delay: 0.2s;
+}
+
+.about-text.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.about-text h2 {
+    font-size: 3.2em;
+    font-weight: 300;
+    margin-bottom: 25px;
+    color: var(--text-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.about-text h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--hover-glow-color);
+}
+
+.about-text p {
+    font-size: 1.15em;
+    margin-bottom: 20px;
+    line-height: 1.7;
+    color: var(--light-gray-text);
+    max-width: 100%;
+    text-align: justify;
+}
+
+/* Seção de Título de Experiência (como separador visual) */
+.experiencia-titulo-section {
+    position: relative;
+    width: 100vw;
+    height: 30vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    text-align: center;
+    color: var(--text-color);
+    padding: 0;
+}
+
+.experiencia-titulo-section video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+.experiencia-titulo-section .video-overlay {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.experiencia-titulo-section .content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    display: none;
+}
+
+/* Nova Seção de Experiência - Layout simplificado e mais bonito */
+.experiencia-section {
+    background-color: var(--dark-section-bg);
+    color: var(--light-gray-text);
+    padding: 80px 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.experiencia-section h2 {
+    font-size: 2.8em;
+    font-weight: 300;
+    color: var(--text-color);
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.experiencia-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 80px;
+    height: 2px;
+    background: var(--hover-glow-color);
+}
+
+.experiencia-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .experiencia-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.experiencia-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    padding-left: 0;
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.experiencia-column.academic-animate {
+    transform: translateX(-150px);
+}
+
+.experiencia-column.professional-animate {
+    transform: translateX(150px);
+}
+
+.experiencia-column.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.experiencia-column h3 {
+    font-size: 2em;
+    color: var(--hover-text-color);
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.experiencia-column h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 1px;
+    background: var(--hover-glow-color);
+}
+
+.experiencia-item {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 20px;
+    transition: none;
+}
+
+.experiencia-item:last-child {
+    margin-bottom: 0;
+}
+
+.experiencia-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: var(--item-line-color);
+    z-index: 0;
+}
+
+.experiencia-item h4 {
+    font-size: 1.4em;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.experiencia-item .datas {
+    font-size: 0.95em;
+    color: var(--light-gray-text);
+    margin-bottom: 10px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.experiencia-item p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: var(--light-gray-text);
+    text-align: justify;
+}
+
+/* Nova Seção de Título de Artigos */
+.artigos-titulo-section {
+    position: relative;
+    width: 100vw;
+    height: 30vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    text-align: center;
+    color: var(--text-color);
+    padding: 0;
+}
+
+.artigos-titulo-section video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+.artigos-titulo-section .video-overlay {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.artigos-titulo-section .content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    display: none;
+}
+
+/* Estilos para a seção de conteúdo de artigos */
+.artigos-section {
+    background-color: var(--dark-section-bg);
+    color: var(--light-gray-text);
+    padding: 80px 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.artigos-section h2 {
+    font-size: 2.8em;
+    font-weight: 300;
+    color: var(--text-color);
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.artigos-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 80px;
+    height: 2px;
+    background: var(--hover-glow-color);
+}
+
+.artigos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 40px;
+    justify-items: center;
+    margin-bottom: 40px; /* Ajustado para 40px para aproximar do texto abaixo */
+}
+
+@media (min-width: 768px) {
+    .artigos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .artigos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.artigo-box {
+    background-color: var(--box-background);
+    border: 1px solid var(--box-border);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex; /* Tornar flex container */
+    flex-direction: column; /* Organizar itens em coluna */
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    width: 350px;
+    height: 550px;
+
+    /* Initial state for animation */
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.artigo-box.artigo-animate {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.artigo-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.artigo-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6);
+    transition: filter 0.3s ease;
+    z-index: 1;
+}
+
+.artigo-box:hover .artigo-image {
+    filter: brightness(0.8);
+}
+
+.artigo-text-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px 0 0; /* Top: 30px, Right: 0, Bottom: 0, Left: 0 */
+    height: 100%; /* Permitir que ocupe altura total disponível */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o botão para baixo */
+    align-items: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.artigo-box h3 {
+    font-size: 1.8em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-weight: 400;
+    padding: 0 30px; /* Adiciona padding de volta para o título, se necessário */
+}
+
+.artigo-box p {
+    font-size: 1.05em;
+    color: var(--light-gray-text);
+    margin-bottom: 25px;
+    line-height: 1.6;
+    text-align: center;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço extra */
+    padding: 0 30px; /* Adiciona padding de volta para o parágrafo, se necessário */
+}
+
+/* Botão "Ver completo" preto e cinzento */
+.btn-ver-completo {
+    display: block; /* Ocupar a largura total disponível */
+    width: 100%; /* Ocupar 100% da largura do seu container */
+    background: var(--button-background-dark);
+    color: #fff;
+    padding: 16px 40px;
+    border-radius: 0 0 8px 8px; /* Cantos arredondados apenas na parte inferior */
+    text-decoration: none;
+    font-size: 1.25em;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* Sombra preta */
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+    margin-top: auto; /* Empurra o botão para a parte inferior */
+}
+
+.btn-ver-completo:hover {
+    background: var(--button-hover-background-dark);
+    /* transform: translateY(-4px); /* Removido para que o botão não suba no hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8); /* Sombra preta mais intensa */
+}
+
+/* Efeito de brilho no botão ao passar o mouse */
+.btn-ver-completo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    transform: skewX(-20deg);
+}
+
+.btn-ver-completo:hover::after {
+    left: 100%;
+}
+
+.background-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.about-me-section,
+.experiencia-section,
+.artigos-section,
+.contactos-section { /* Added .contactos-section here */
+    position: relative;
+    overflow: hidden;
+}
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.7s ease-out;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #000000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Estilos para o Pop-up (Modal) */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--popup-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-content {
+    background: var(--popup-content-paper-color); /* Usando a nova variável para cor de papel escuro */
+    border: 1px solid var(--popup-border);
+    border-radius: 10px;
+    padding: 50px; /* Aumentado o padding para simular margens mais largas de uma folha */
+    max-width: 700px; /* Largura ajustada para simular A4 (aproximadamente 21cm) */
+    width: 90%; /* Continua responsivo */
+    max-height: 90%;
+    aspect-ratio: 1 / 1.414; /* Proporção de uma folha A4 (largura / altura) */
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito longo */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.popup-overlay.active .popup-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.popup-content h2 {
+    color: var(--text-color);
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 400;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.popup-content h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--hover-glow-color);
+}
+
+.article-a4-text {
+    font-size: 1.05em; /* Ligeiramente ajustado para melhor encaixe no novo formato */
+    line-height: 1.8; /* Espaçamento entre linhas maior para legibilidade */
+    color: var(--light-gray-text);
+    text-align: justify;
+    margin-bottom: 30px; /* Espaço antes da barra de separação */
+    padding: 0 15px; /* Mais padding para o texto dentro do content */
+}
+
+/* Estilos para a barra de separação da assinatura */
+.signature-divider {
+    width: 80%;
+    height: 1px;
+    background-color: var(--divider-color);
+    margin: 25px auto 20px auto; /* Espaço acima e abaixo da barra */
+}
+
+/* Estilos para a imagem da assinatura */
+.popup-signature {
+    max-width: 150px; /* Diminui o tamanho da assinatura */
+    height: auto;
+    display: block;
+    margin: 0 auto 30px auto; /* Centraliza e adiciona espaço abaixo */
+}
+
+/* Botão "Voltar" preto e cinzento */
+.btn-voltar {
+    display: block; /* Ocupa a largura total */
+    width: fit-content;
+    margin: 0 auto; /* Centraliza o botão */
+    background: var(--button-background-light); /* Cinzento mais claro */
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra preta */
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    position: relative; /* Necessário para o ::after */
+    overflow: hidden; /* Garante que o brilho não vaza */
+}
+
+.btn-voltar:hover {
+    background: var(--button-hover-background-light); /* Cinzento mais escuro ao hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6); /* Sombra preta mais intensa */
+}
+
+/* Adiciona o efeito de brilho ao botão "Voltar" */
+.btn-voltar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    transform: skewX(-20deg);
+}
+
+.btn-voltar:hover::after {
+    left: 100%;
+}
+
+/* Nova Seção de Título de Contactos */
+.contactos-titulo-section {
+    position: relative;
+    width: 100vw;
+    height: 30vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    text-align: center;
+    color: var(--text-color);
+    padding: 0;
+}
+
+.contactos-titulo-section video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+.contactos-titulo-section .video-overlay {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.contactos-titulo-section .content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    display: none;
+}
+
+/* Estilos para a seção de conteúdo de contactos */
+.contactos-section {
+    background-color: var(--dark-section-bg);
+    color: var(--light-gray-text);
+    padding: 50px 5%; /* Diminuído de 80px para 50px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 35h; /* Diminuído de 80vh para 60vh */
+}
+
+.contactos-section h2 {
+    font-size: 2.8em;
+    font-weight: 300;
+    color: var(--text-color);
+    margin-bottom: 40px; /* Diminuído de 60px para 40px */
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.contactos-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 80px;
+    height: 2px;
+    background: var(--hover-glow-color);
+}
+
+.contactos-content {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+
+    /* Propriedades iniciais para a animação */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.contactos-content.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contactos-content p {
+    font-size: 1.15em;
+    margin-bottom: 30px; /* Diminuído de 40px para 30px */
+    line-height: 1.7;
+    color: var(--light-gray-text);
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 30px; /* Diminuído de 50px para 30px */
+}
+
+.contact-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--light-gray-text);
+    font-size: 1.1em;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.contact-icon i {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.contact-icon span {
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.contact-icon:hover {
+    transform: translateY(-8px);
+}
+
+.contact-icon.linkedin:hover i {
+    color: #0077B5;
+    text-shadow: 0 0 15px #0077B5;
+}
+
+.contact-icon.instagram:hover i {
+    color: #E4405F;
+    text-shadow: 0 0 15px #E4405F;
+}
+
+.contact-icon:hover span {
+    color: var(--hover-text-color);
+    text-shadow: 0 0 5px var(--hover-glow-color);
+}
+
+/* Novo estilo para o botão Curriculum Vitae */
+.btn-cv {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 1px solid var(--hover-glow-color); /* Borda fina com a cor de brilho */
+    border-radius: 50px; /* Botão arredondado */
+    background: transparent; /* Fundo transparente */
+    color: var(--text-color); /* Cor do texto branco */
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 400;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0); /* Sombra inicial transparente */
+}
+
+.btn-cv:hover {
+    background: rgba(255, 255, 255, 0.08); /* Fundo ligeiramente visível ao hover */
+    color: var(--hover-text-color);
+    box-shadow: 0 0 20px var(--hover-glow-color); /* Sombra de brilho suave ao hover */
+    transform: translateY(-5px); /* Leve elevação ao hover */
+}
+
+/* ============================== */
+/* MOBILE ADJUSTMENTS */
+/* ============================== */
+
+@media (max-width: 767px) {
+  .navbar {
+    display: none;
+  }
+
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-photo {
+    margin-right: 0;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  /* Adjust font size for paragraphs within .about-text on mobile */
+  .about-text p {
+    font-size: 0.95em; /* Smaller font size for mobile */
+    padding: 0 100px; /* Increased horizontal padding to prevent cutting off */
+  }
+
+  .experiencia-content {
+    display: block; /* Ensures a single column */
+  }
+
+  .artigos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .experiencia-titulo-section video,
+  .artigos-titulo-section video,
+  .contactos-titulo-section video {
+      transform: translate(-50%, -50%) scale(0.8); /* mantém o centro e “afasta” o vídeo */
+  }
+}
+
+@media (max-width: 767px) {
+  .experiencia-column {
+      margin-bottom: 60px; /* aumenta o espaço entre as colunas */
+  }
+
+  .experiencia-column:last-child {
+      margin-bottom: 0; /* evita espaço depois da última */
+  }
+}
+
+/* FAQ Section Styling */
+.faq-section {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 800px;
+    text-align: left;
+}
+
+.faq-section h2 {
+    font-size: 2em;
+    font-weight: 300;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.faq-subtitle {
+    text-align: center;
+    color: var(--light-gray-text);
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 18px 22px;
+    font-size: 1.15em;
+    font-weight: 400;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 22px;
+}
+
+.faq-answer p {
+    padding: 15px 0;
+    font-size: 1em;
+    color: var(--light-gray-text);
+    line-height: 1.6;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+    .faq-section {
+        max-width: 100%;
+    }
+
+    .faq-question {
+        font-size: 1em;
+        padding: 15px;
+    }
+}
+

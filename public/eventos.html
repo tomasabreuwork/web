@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Tomás Abreu</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/eventos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+    </div>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/public/index.html#inicio">Início</a></li>
+                <li><a href="/public/index.html#sobre">Sobre</a></li>
+                <li><a href="/public/index.html#experiencia-titulo">Experiência</a></li>
+                <li><a href="/public/index.html#artigos-titulo">Artigos</a></li>
+                <li><a href="/public/eventos.html">Eventos</a></li>
+                <li><a href="/public/index.html#contactos-titulo">Contactos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="eventos-hero" class="eventos-hero">
+        <video autoplay muted loop playsinline>
+            <source src="../static/videos/eventos.mp4" type="video/mp4">
+            O seu navegador não suporta vídeos HTML5.
+        </video>
+        <div class="video-overlay"></div>
+    </section>
+
+    <section id="galeria-eventos" class="galeria-eventos-section">
+        <canvas class="background-particles"></canvas>
+        <div class="eventos-container">
+            <h2>Galeria de Eventos</h2>
+            
+            <div class="eventos-grid">
+                <!-- Evento 1 -->
+                <div class="evento-card">
+                    <div class="evento-image">
+                        <img src="../static/images/v2cn2026.jpg" alt="V2CN 2026">
+                        <div class="evento-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="evento-info">
+                        <h3>V2CN - MADRID</h3>
+                        <p class="evento-data"><i class="far fa-calendar-alt"></i>8 a 11 de Fevereiro, 2026</p>
+                        <p class="evento-descricao">Foi com grande orgulho que tive a oportunidade de representar portugal desta vez no exercicio V2CN, em Madrid, Espanha. </p>
+                    </div>
+                </div>
+
+                <!-- Evento 2 -->
+                <div class="evento-card">
+                    <div class="evento-image">
+                        <img src="../static/images/cc2025.png" alt="Workshop de Python para DevSecOps">
+                        <div class="evento-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="evento-info">
+                        <h3>NATO Cyber Coalition 2025</h3>
+                        <p class="evento-data"><i class="far fa-calendar-alt"></i>28 de novembro a 4 de dezembro, 2025</p>
+                        <p class="evento-descricao">Orgulhoso por ter participado no exercício NATO Cyber Coalition 2025, contribuindo para o reforço da cooperação internacional e da resiliência em ciberdefesa. Uma experiência exigente e extremamente enriquecedora.</p>
+                    </div>
+                </div>
+
+                <!-- Evento 3 -->
+                <div class="evento-card">
+                    <div class="evento-image">
+                        <img src="../static/images/ls2024.png" alt="NATO Locked Shields 2024">
+                        <div class="evento-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="evento-info">
+                        <h3>NATO Locked Shields 2024</h3>
+                        <p class="evento-data"><i class="far fa-calendar-alt"></i>23 a 26 de abril, 2024</p>
+                        <p class="evento-descricao">Participei, a partir de Portugal, no Locked Shields 2024, o maior exercício internacional de ciberdefesa organizado pelo NATO Cooperative Cyber Defence Centre of Excellence, reforçando competências de defesa, coordenação e resposta a incidentes em ambiente de alta pressão.</p>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="contactos-titulo" class="contactos-titulo-section">
+        <video autoplay muted loop playsinline>
+            <source src="../static/videos/contactos.mp4" type="video/mp4">
+            O seu navegador não suporta vídeos HTML5.
+        </video>
+        <div class="video-overlay"></div>
+    </section>
+
+    <section id="contactos" class="contactos-section">
+        <canvas class="background-particles"></canvas>
+        <div class="contactos-content">
+            <p>Podes contactar-me através dos seguintes meios:</p>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/tomasabreuwork" target="_blank" class="contact-icon linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://www.instagram.com/bonattotomas/" target="_blank" class="contact-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+            </div>
+            <a href="../static/pdf/Curriculum.pdf" target="_blank" class="btn-cv">Curriculum Vitae</a>
+        </div>
+    </section>
+
+    <script src="../static/script.js"></script>
+    <script src="../static/eventos.js"></script>
+</body>
+</html>

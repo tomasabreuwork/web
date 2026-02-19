@@ -2,10 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Rolagem suave para as âncoras da navbar
     document.querySelectorAll('nav ul li a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const href = this.getAttribute('href');
+
+            // Só faz scroll suave se for uma âncora interna (#)
+            // Se for link para outra página (.html), deixa navegar normalmente
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
         });
     });
 
@@ -21,95 +28,101 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-     // Troca o vídeo de fundo para mobile
+    // Troca o vídeo de fundo para mobile
     const heroVideo = document.querySelector('.hero-video video');
-    if (window.innerWidth <= 767) {
+    if (heroVideo && window.innerWidth <= 767) {
         heroVideo.querySelector('source').setAttribute('src', '../static/videos/background_mobile.mp4');
         heroVideo.load();
     }
 
-    // Animação da seção "Sobre Mim"
+    // Animação da secção "Sobre Mim"
     const aboutSection = document.querySelector('.about-me-section');
     const profilePhoto = document.querySelector('.profile-photo');
     const aboutText = document.querySelector('.about-text');
 
-    const aboutObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: window.innerWidth <= 767 ? 0.2 : 0.6
-    };
+    if (aboutSection && profilePhoto && aboutText) {
+        const aboutObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: window.innerWidth <= 767 ? 0.2 : 0.6
+        };
 
-    const aboutObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                profilePhoto.classList.add('active');
-                aboutText.classList.add('active');
-            } else {
-                profilePhoto.classList.remove('active');
-                aboutText.classList.remove('active');
-            }
-        });
-    }, aboutObserverOptions);
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    profilePhoto.classList.add('active');
+                    aboutText.classList.add('active');
+                } else {
+                    profilePhoto.classList.remove('active');
+                    aboutText.classList.remove('active');
+                }
+            });
+        }, aboutObserverOptions);
 
-    aboutObserver.observe(aboutSection);
+        aboutObserver.observe(aboutSection);
+    }
 
     // Animação de Experiência
     const experienciaSection = document.querySelector('.experiencia-section');
     const academicColumn = document.querySelector('.experiencia-column:nth-child(1)');
     const professionalColumn = document.querySelector('.experiencia-column:nth-child(2)');
 
-    academicColumn.classList.add('academic-animate');
-    professionalColumn.classList.add('professional-animate');
+    if (experienciaSection && academicColumn && professionalColumn) {
+        academicColumn.classList.add('academic-animate');
+        professionalColumn.classList.add('professional-animate');
 
-    const experienciaObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: window.innerWidth <= 767 ? 0.2 : 0.5
-    };
+        const experienciaObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: window.innerWidth <= 767 ? 0.2 : 0.5
+        };
 
-    const experienciaObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                academicColumn.classList.add('active');
-                professionalColumn.classList.add('active');
-            } else {
-                academicColumn.classList.remove('active');
-                professionalColumn.classList.remove('active');
-            }
-        });
-    }, experienciaObserverOptions);
+        const experienciaObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    academicColumn.classList.add('active');
+                    professionalColumn.classList.add('active');
+                } else {
+                    academicColumn.classList.remove('active');
+                    professionalColumn.classList.remove('active');
+                }
+            });
+        }, experienciaObserverOptions);
 
-    experienciaObserver.observe(experienciaSection);
+        experienciaObserver.observe(experienciaSection);
+    }
 
     // Animação de Artigos
     const artigosSection = document.querySelector('.artigos-section');
     const artigoBoxes = document.querySelectorAll('.artigo-box');
 
-    const artigosObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: window.innerWidth <= 767 ? 0.2 : 0.5
-    };
+    if (artigosSection && artigoBoxes.length > 0) {
+        const artigosObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: window.innerWidth <= 767 ? 0.2 : 0.5
+        };
 
-    const artigosObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                artigoBoxes.forEach((box, index) => {
-                    box.style.transitionDelay = window.innerWidth <= 767 ? '0s' : `${index * 0.1}s`;
-                    box.classList.add('artigo-animate');
-                });
-            } else {
-                artigoBoxes.forEach((box) => {
-                    box.classList.remove('artigo-animate');
-                    box.style.transitionDelay = '0s';
-                });
-            }
-        });
-    }, artigosObserverOptions);
+        const artigosObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    artigoBoxes.forEach((box, index) => {
+                        box.style.transitionDelay = window.innerWidth <= 767 ? '0s' : `${index * 0.1}s`;
+                        box.classList.add('artigo-animate');
+                    });
+                } else {
+                    artigoBoxes.forEach((box) => {
+                        box.classList.remove('artigo-animate');
+                        box.style.transitionDelay = '0s';
+                    });
+                }
+            });
+        }, artigosObserverOptions);
 
-    artigosObserver.observe(artigosSection);
+        artigosObserver.observe(artigosSection);
+    }
 
-    // 🔹 NOVO: Animação da seção Certificados
+    // Animação da secção Certificados
     const certificadosSection = document.querySelector('.certificados-section');
     const certLogoCards = document.querySelectorAll('.cert-logo-card');
 
@@ -143,23 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactosSection = document.querySelector('.contactos-section');
     const contactosContent = document.querySelector('.contactos-content');
 
-    const contactosObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: window.innerWidth <= 767 ? 0.2 : 0.6
-    };
+    if (contactosSection && contactosContent) {
+        const contactosObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: window.innerWidth <= 767 ? 0.2 : 0.6
+        };
 
-    const contactosObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                contactosContent.classList.add('active');
-            } else {
-                contactosContent.classList.remove('active');
-            }
-        });
-    }, contactosObserverOptions);
+        const contactosObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    contactosContent.classList.add('active');
+                } else {
+                    contactosContent.classList.remove('active');
+                }
+            });
+        }, contactosObserverOptions);
 
-    contactosObserver.observe(contactosSection);
+        contactosObserver.observe(contactosSection);
+    }
 
     // Tela de carregamento
     window.addEventListener('load', () => {
@@ -175,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Partículas de fundo
     document.querySelectorAll('.background-particles').forEach(createParticleCanvas);
 
-    // 🆕 NOVO — Lógica de troca entre logotipos e cursos
+    // Lógica de troca entre logotipos e cursos
     const logosView = document.getElementById("logos-view");
     const coursesView = document.getElementById("courses-view");
     const companyTitle = document.getElementById("company-title");
@@ -188,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
         fiap: [
             { nome: "Cibersecurity", horas: "40h", descricao: "Fundamentos de proteção digital e redes." },
-            { nome: "DevOps & Agile Culture", horas: "30h", descricao: "Automação e metodologias ágeis." },
+            { nome: "DevOps & Agile Culture", horas: "30h", descricao: "Automatização e metodologias ágeis." },
             { nome: "IA e Computacional", horas: "35h", descricao: "Machine Learning e redes neuronais." }
         ],
         udemy: [
@@ -199,24 +214,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(".cert-logo-card").forEach(card => {
         card.addEventListener("click", () => {
             const company = card.dataset.company;
-            logosView.classList.add("hidden");
-            coursesView.classList.remove("hidden");
-            companyTitle.textContent = company.toUpperCase();
+            if (logosView) logosView.classList.add("hidden");
+            if (coursesView) coursesView.classList.remove("hidden");
+            if (companyTitle) companyTitle.textContent = company.toUpperCase();
 
-            coursesList.innerHTML = coursesData[company]
-                .map(course => `
-                    <div class="course-item">
-                        <h4>${course.nome}</h4>
-                        <p><strong>Horas:</strong> ${course.horas}</p>
-                        <p>${course.descricao}</p>
-                    </div>
-                `).join("");
+            if (coursesList && coursesData[company]) {
+                coursesList.innerHTML = coursesData[company]
+                    .map(course => `
+                        <div class="course-item">
+                            <h4>${course.nome}</h4>
+                            <p><strong>Horas:</strong> ${course.horas}</p>
+                            <p>${course.descricao}</p>
+                        </div>
+                    `).join("");
+            }
         });
     });
 
     backButton?.addEventListener("click", () => {
-        coursesView.classList.add("hidden");
-        logosView.classList.remove("hidden");
+        if (coursesView) coursesView.classList.add("hidden");
+        if (logosView) logosView.classList.remove("hidden");
     });
 
     // FAQ Toggle
@@ -224,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const faqItem = button.parentElement;
             faqItem.classList.toggle('active');
-            
+
             const answer = faqItem.querySelector('.faq-answer');
             answer.style.maxHeight = faqItem.classList.contains('active')
                 ? answer.scrollHeight + "px"

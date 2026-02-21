@@ -85,35 +85,36 @@ document.addEventListener('DOMContentLoaded', () => {
         aboutObserver.observe(aboutSection);
     }
 
-    // Animação de Experiência
-    const experienciaSection = document.querySelector('.experiencia-section');
-    const academicColumn = document.querySelector('.experiencia-column:nth-child(1)');
-    const professionalColumn = document.querySelector('.experiencia-column:nth-child(2)');
+    // ============================
+    // EXPERIENCIA TABS
+    // ============================
+    const expTabs = document.querySelectorAll('.exp-tab');
+    const expPanels = document.querySelectorAll('.experiencia-panel');
 
-    if (experienciaSection && academicColumn && professionalColumn) {
-        academicColumn.classList.add('academic-animate');
-        professionalColumn.classList.add('professional-animate');
+    expTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.tab;
 
-        const experienciaObserverOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: window.innerWidth <= 767 ? 0.2 : 0.5
-        };
-
-        const experienciaObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    academicColumn.classList.add('active');
-                    professionalColumn.classList.add('active');
-                } else {
-                    academicColumn.classList.remove('active');
-                    professionalColumn.classList.remove('active');
-                }
+            // Remove active de todos
+            expTabs.forEach(t => t.classList.remove('active'));
+            expPanels.forEach(p => {
+                p.classList.remove('active');
+                p.style.opacity = '0';
+                p.style.transform = 'translateY(16px)';
             });
-        }, experienciaObserverOptions);
 
-        experienciaObserver.observe(experienciaSection);
-    }
+            // Ativa o selecionado
+            tab.classList.add('active');
+            const panel = document.getElementById(`panel-${target}`);
+            if (panel) {
+                panel.classList.add('active');
+                // Força reflow para a transição funcionar
+                panel.getBoundingClientRect();
+                panel.style.opacity = '1';
+                panel.style.transform = 'translateY(0)';
+            }
+        });
+    });
 
     // Animação de Artigos
     const artigosSection = document.querySelector('.artigos-section');

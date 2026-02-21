@@ -95,39 +95,50 @@
 
     <section id="experiencia" class="experiencia-section">
         <canvas class="background-particles"></canvas>
-        <div class="experiencia-content">
-            <div class="experiencia-column">
-                <h3>Académica</h3>
-                <!-- 
+        <div class="experiencia-tabs-wrapper">
+
+            <!-- Botões de seleção -->
+            <div class="experiencia-tabs">
+                <button class="exp-tab active" data-tab="academica">Académica</button>
+                <button class="exp-tab" data-tab="profissional">Profissional</button>
+            </div>
+
+            <!-- Painel Académica -->
+            <div class="experiencia-panel active" id="panel-academica">
                 <div class="experiencia-item">
-                    <h4>Curso Profissional de Informática e Sistemas</h4>
-                    <p class="datas">2019-2022</p>
-                    <p>O meu percurso no ensino secundário ficou marcado pelo momento em que desenvolvi uma verdadeira paixão pela área das Tecnologias de Informação. No entanto, foi a programação que mais me cativou, e desde cedo percebi que esta seria a minha vocação.</p>
-                </div> -->
-                <div class="experiencia-item">
-                    <h4>Curso Avançado de Programador em Ciberdefesa</h4>
-                    <p class="datas">2023-2024</p>
-                    <p>O Comando de Operações de Ciberdefesa (COCiber), em colaboração com o Instituto Politécnico de Beja (IPBeja), promoveu este curso com a duração de um ano juntando as componentes teóricas e práticas do mundo ciber. Ao longo deste período, destacou-se a preparação de novos programadores na área da cibersegurança, tendo-nos sido proporcionada a oportunidade de aplicar os conhecimentos adquiridos através de um estágio profissional nas instalações do Comando de Operações de Ciberdefesa (COCiber).</p>
+                    <div class="exp-item-header">
+                        <h4>Curso Avançado de Programador em Ciberdefesa</h4>
+                        <span class="datas">2023 — 2024</span>
+                    </div>
+                    <p>O Comando de Operações de Ciberdefesa (COCiber), em colaboração com o Instituto Politécnico de Beja (IPBeja), promoveu este curso com a duração de um ano juntando as componentes teóricas e práticas do mundo ciber. Ao longo deste período, destacou-se a preparação de novos programadores na área da cibersegurança, tendo-nos sido proporcionada a oportunidade de aplicar os conhecimentos adquiridos através de um estágio profissional nas instalações do COCiber.</p>
                 </div>
                 <div class="experiencia-item">
-                    <h4>Engenharia Informática e Internet das Coisas (IOT) - Mestrando</h4>
-                    <p class="datas">2025 - ...</p>
-                    <p>Desenvolver a capacidade de criar soluções inovadoras para problemas existentes, integrando equipas multidisciplinares. Mestrado lecionado pela Escola Superior de Tecnologia e Gestão (IPBEJA)</p>
+                    <div class="exp-item-header">
+                        <h4>Engenharia Informática e Internet das Coisas (IOT) — Mestrando</h4>
+                        <span class="datas">2025 — ...</span>
+                    </div>
+                    <p>Desenvolver a capacidade de criar soluções inovadoras para problemas existentes, integrando equipas multidisciplinares. Mestrado lecionado pela Escola Superior de Tecnologia e Gestão (IPBEJA).</p>
                 </div>
             </div>
-            <div class="experiencia-column">
-                <h3>Profissional</h3>
+
+            <!-- Painel Profissional -->
+            <div class="experiencia-panel" id="panel-profissional">
                 <div class="experiencia-item">
-                    <h4>Departamento de Programação em Ciberdefesa - COCIBER</h4>
-                    <p class="datas">2024 - ...</p>
+                    <div class="exp-item-header">
+                        <h4>Departamento de Programação em Ciberdefesa — COCIBER</h4>
+                        <span class="datas">2024 — ...</span>
+                    </div>
                     <p>Uma equipa dedicada e focada na automatização de processos de programação em diversas linguagens apoiando todas as restantes secções do Comando de Operações de Ciberdefesa (COCiber), contribuindo para a otimização e agilização das suas tarefas.</p>
                 </div>
                 <div class="experiencia-item">
-                    <h4>Departamento de Cyber Threat Intelligence Estratégico - COCIBER</h4>
-                    <p class="datas">2025 - 2026</p>
-                    <p>A equipa de Ciber Threat Intelligence, foca-se em promover a consciencialização geral sobre diversos eventos que ocorram no Ciberespaço e que possam ter impacto nas infraestruturas ciber do Estado Maior General das Forças Armadas</p>
+                    <div class="exp-item-header">
+                        <h4>Departamento de Cyber Threat Intelligence Estratégico — COCIBER</h4>
+                        <span class="datas">2025 — 2026</span>
+                    </div>
+                    <p>A equipa de Ciber Threat Intelligence foca-se em promover a consciencialização geral sobre diversos eventos que ocorram no Ciberespaço e que possam ter impacto nas infraestruturas ciber do Estado Maior General das Forças Armadas.</p>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -154,7 +165,7 @@
             <a class="artigo-box" href="https://www.linkedin.com/pulse/intelig%C3%AAncia-artificial-mundo-das-tecnologias-tom%C3%A1s-abreu-ffsgf/?trackingId=5ju2pdk9T4Ky%2F5CA0%2FvSNg%3D%3D" target="_blank">
                 <div class="artigo-image" style="background-image: url('../static/images/artigo2.jpg');"></div>
                 <div class="artigo-text-content">
-                    <h3>Inteligência Artificial em IT</h3>
+                    <h3>Inteligência Artificial no Mundo das Tecnologias</h3>
                 </div>
             </a>
             <a class="artigo-box" href="#artigos-titulo">
@@ -179,53 +190,65 @@
 
     <section id="contactos" class="contactos-section">
         <canvas class="background-particles"></canvas>
-        
-        <div class="faq-section">
-            <h2>Perguntas Frequentes</h2>
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Aconselho a Via Militar?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Na minha opinião, todos os jovens deveriam considerar esta possibilidade. Fazer parte dasas forças armadas vai muito além do que a maioria das pessoas conhece, se tiverem alguma dúvida, podes entrar em contacto comigo!</p>
+
+        <div class="contactos-wrapper">
+
+            <!-- Lado esquerdo: FAQ -->
+            <div class="contactos-faq">
+                <p class="contactos-label">Perguntas Frequentes</p>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Aconselho a Via Militar?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Na minha opinião, todos os jovens deveriam considerar esta possibilidade. Fazer parte das forças armadas vai muito além do que a maioria das pessoas conhece — se tiveres alguma dúvida, podes entrar em contacto comigo!</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Porquê a Força Aérea Portuguesa?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Quando finalizei o meu ensino secundário descobri que a Força Aérea Portuguesa disponibilizou vagas para a especialidade de Operador de Ciberdefesa. Como sempre tive interesse em alistar-me nas Forças Armadas e na vertente da cibersegurança, olhei para esta oportunidade como algo transformador para a minha vida pessoal e profissional.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>A Cibersegurança "é o futuro"?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Com a rapidez que o mundo está a evoluir, a preocupação de garantir a credibilidade de informação e veracidade de dados torna-se cada vez maior — e é por isso que a cibersegurança é cada vez mais essencial.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Porquê a Força Aérea Portuguesa?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Quando finalizei o meu ensino secundário descobri que a Força Aérea Portuguesa disponibilizou vagas para a especialidade de Operador de Ciberdefesa. Como sempre tive interesse em alistar-me nas Forças Armadas e na vertente da cibersegurança, olhei para esta oportunidade como uma boa oportunidade para a minha vida pessoal e profissional</p>
+            <!-- Divisor vertical -->
+            <div class="contactos-divider"></div>
+
+            <!-- Lado direito: Contactos + CV -->
+            <div class="contactos-right">
+                <p class="contactos-label">Contactos</p>
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/tomasabreuwork" target="_blank" class="contact-icon linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                        <i class="fas fa-arrow-right contact-arrow"></i>
+                    </a>
+                    <a href="https://www.instagram.com/bonattotomas/" target="_blank" class="contact-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                        <i class="fas fa-arrow-right contact-arrow"></i>
+                    </a>
+                </div>
+                <div class="contactos-cv-block">
+                    <p class="contactos-label">Curriculum Vitae</p>
+                    <a href="../static/pdf/Curriculum.pdf" target="_blank" class="btn-cv">Download</a>
                 </div>
             </div>
 
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>A Cibersegurança "é o futuro"?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Com a rapidez que o mundo está a evoluir, a preocupação de garantir a credibilidade de informação e veracidade de dados (Data) torna-se cada vez maior, e é por isso que a cibersegurança é cada vez mais importante.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="contactos-content">
-            <p>Podes contactar-me através dos seguintes meios:</p>
-            <div class="contact-links">
-                <a href="https://www.linkedin.com/in/tomasabreuwork" target="_blank" class="contact-icon linkedin">
-                    <i class="fab fa-linkedin-in"></i>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://www.instagram.com/bonattotomas/" target="_blank" class="contact-icon instagram">
-                    <i class="fab fa-instagram"></i>
-                    <span>Instagram</span>
-                </a>
-            </div>
-            <a href="../static/pdf/Curriculum.pdf" target="_blank" class="btn-cv">CURRICULUM VITAE</a>
         </div>
     </section>
 

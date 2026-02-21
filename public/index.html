@@ -10,7 +10,23 @@
 </head>
 <body>
     <div id="loading-screen">
-        <div class="loader"></div>
+        <div class="loading-curtain left"></div>
+        <div class="loading-curtain right"></div>
+        <div class="loading-content">
+            <div class="loading-quote">
+                <div class="loading-line"></div>
+                <p id="loading-quote-text"></p>
+                <span id="loading-quote-author"></span>
+                <div class="loading-line"></div>
+            </div>
+            <div class="loading-progress-wrapper">
+                <div class="loading-progress-bar">
+                    <div class="loading-progress-fill" id="loading-fill"></div>
+                </div>
+                <span class="loading-progress-percent" id="loading-percent">0%</span>
+                <button class="btn-enter-site" id="btn-enter-site">Entrar no site</button>
+            </div>
+        </div>
     </div>
 
     <!-- Hamburger Menu Mobile -->

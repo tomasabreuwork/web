@@ -199,16 +199,74 @@ document.addEventListener('DOMContentLoaded', () => {
         contactosObserver.observe(contactosSection);
     }
 
-    // Tela de carregamento
+    // Tela de carregamento com frase motivadora e barra de progresso
+    const quotes = [
+        { text: "O sucesso é a soma de pequenos esforços repetidos dia após dia.", author: "Robert Collier" },
+        { text: "A disciplina é a ponte entre os objetivos e as conquistas.", author: "Jim Rohn" },
+        { text: "Não tenhas medo de desistir do bom para perseguir o excelente.", author: "John D. Rockefeller" },
+        { text: "O único modo de fazer um grande trabalho é amar o que fazes.", author: "Steve Jobs" },
+        { text: "A coragem não é a ausência do medo, mas a decisão de que algo é mais importante.", author: "Ambrose Redmoon" }
+    ];
+
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    const quoteTextEl = document.getElementById('loading-quote-text');
+    const quoteAuthorEl = document.getElementById('loading-quote-author');
+    if (quoteTextEl) quoteTextEl.textContent = `"${randomQuote.text}"`;
+    if (quoteAuthorEl) quoteAuthorEl.textContent = `— ${randomQuote.author}`;
+
+    const fill = document.getElementById('loading-fill');
+    const percentEl = document.getElementById('loading-percent');
+    const progressBar = document.querySelector('.loading-progress-bar');
+    const enterBtn = document.getElementById('btn-enter-site');
+    let progress = 0;
+
+    const progressInterval = setInterval(() => {
+        const step = progress < 70 ? Math.random() * 8 + 3 : Math.random() * 2 + 0.5;
+        progress = Math.min(progress + step, 92);
+        if (fill) fill.style.width = progress + '%';
+        if (percentEl) percentEl.textContent = Math.floor(progress) + '%';
+    }, 120);
+
     window.addEventListener('load', () => {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            loadingScreen.addEventListener('transitionend', () => {
-                loadingScreen.remove();
-            });
-        }
+        clearInterval(progressInterval);
+
+        // Completa a barra para 100%
+        if (fill) fill.style.width = '100%';
+        if (percentEl) percentEl.textContent = '100%';
+
+        // Após 600ms substitui a barra pelo botão
+        setTimeout(() => {
+            if (progressBar) progressBar.style.opacity = '0';
+            if (percentEl) percentEl.style.opacity = '0';
+
+            setTimeout(() => {
+                if (progressBar) progressBar.style.display = 'none';
+                if (percentEl) percentEl.style.display = 'none';
+                if (enterBtn) {
+                    enterBtn.style.display = 'block';
+                    // Força reflow para a transição funcionar
+                    enterBtn.getBoundingClientRect();
+                    enterBtn.classList.add('visible');
+                }
+            }, 400);
+        }, 600);
     });
+
+    // Fechar a loading screen ao clicar no botão — cortinas a abrir para os lados
+    if (enterBtn) {
+        enterBtn.addEventListener('click', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (!loadingScreen) return;
+
+            // Inicia a animação — conteúdo faz fade e cortinas abrem
+            loadingScreen.classList.add('exit');
+
+            // Remove o elemento depois da animação terminar (2.2s das cortinas)
+            setTimeout(() => {
+                loadingScreen.remove();
+            }, 2300);
+        });
+    }
 
     // Partículas de fundo
     document.querySelectorAll('.background-particles').forEach(createParticleCanvas);

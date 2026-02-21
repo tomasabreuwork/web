@@ -1091,8 +1091,198 @@ header {
 /* ============================== */
 
 /* ============================== */
-/* HAMBURGER MENU */
+/* LOADING SCREEN */
 /* ============================== */
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+}
+
+/* As duas cortinas */
+.loading-curtain {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #070707;
+    transition: transform 2.2s cubic-bezier(0.77, 0, 0.18, 1);
+    z-index: 1;
+}
+
+.loading-curtain.left  { left: 0; }
+.loading-curtain.right { right: 0; }
+
+/* Estado aberto — cortinas afastam-se para os lados */
+#loading-screen.exit .loading-curtain.left {
+    transform: translateX(-100%);
+}
+#loading-screen.exit .loading-curtain.right {
+    transform: translateX(100%);
+}
+
+/* Conteúdo por cima das cortinas */
+.loading-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    transition: opacity 0.6s ease;
+}
+
+#loading-screen.exit .loading-content {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Remover o loader spinner */
+.loader {
+    display: none;
+}
+
+/* Barra de progresso */
+.loading-progress-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 280px;
+    min-height: 48px;
+    justify-content: center;
+}
+
+.loading-progress-bar {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: opacity 0.4s ease;
+}
+
+.loading-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 2px;
+    transition: width 0.1s ease;
+}
+
+.loading-progress-percent {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 0.78em;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 3px;
+    transition: opacity 0.4s ease;
+}
+
+/* Botão entrar */
+.btn-enter-site {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 0.85em;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 14px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease,
+                background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-enter-site.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn-enter-site:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+@keyframes spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-quote {
+    max-width: 420px;
+    text-align: center;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.loading-quote p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 1.15em;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    letter-spacing: 0.3px;
+    font-style: italic;
+}
+
+.loading-quote span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 0.82em;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.loading-line {
+    width: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+    animation: expandLine 1.8s ease forwards;
+}
+
+@keyframes expandLine {
+    from { width: 0; }
+    to   { width: 60px; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 .hamburger {
     display: none;
@@ -1109,6 +1299,19 @@ header {
     justify-content: center;
     align-items: center;
     gap: 6px;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Esconde o hambúrguer na landing page (hero section) */
+.hamburger.hero-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Quando o menu está aberto, o X fica ACIMA do overlay */
+.hamburger.open {
+    z-index: 10001;
 }
 
 .hamburger span {

@@ -265,6 +265,48 @@
 }
 
 /* ============================== */
+/* 2K RESOLUTION (2560px+) */
+/* ============================== */
+
+@media (min-width: 2560px) {
+    .eventos-hero {
+        height: 70vh;
+    }
+
+    .galeria-eventos-section {
+        padding: 140px 5%;
+    }
+
+    .eventos-container {
+        max-width: 2000px;
+    }
+
+    .eventos-container h2 {
+        font-size: 4.5em;
+    }
+
+    .eventos-grid {
+        gap: 60px;
+    }
+
+    .evento-info h3 {
+        font-size: 2em;
+    }
+
+    .evento-data {
+        font-size: 1.2em;
+    }
+
+    .evento-descricao {
+        font-size: 1.2em;
+    }
+
+    .evento-info {
+        padding: 35px;
+    }
+}
+
+/* ============================== */
 /* RESPONSIVE - TABLET */
 /* ============================== */
 

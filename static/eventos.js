@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ✅ Função para criar canvas de partículas
+
 function createParticleCanvas(canvas) {
     const ctx = canvas.getContext('2d');
     let particles = [];

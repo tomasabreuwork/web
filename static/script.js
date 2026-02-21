@@ -268,6 +268,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Animação dos títulos das sections separadoras
+    const sectionTitles = document.querySelectorAll('.section-hero-title');
+    if (sectionTitles.length > 0) {
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.4 });
+
+        sectionTitles.forEach(title => titleObserver.observe(title));
+    }
+
     // Partículas de fundo
     document.querySelectorAll('.background-particles').forEach(createParticleCanvas);
 
@@ -331,6 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
 
 function createParticleCanvas(canvas) {
     const ctx = canvas.getContext('2d');

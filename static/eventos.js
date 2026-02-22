@@ -1,14 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ✅ Esconde a tela de carregamento quando tudo estiver carregado
-    window.addEventListener('load', () => {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            loadingScreen.addEventListener('transitionend', () => {
-                loadingScreen.remove();
+    // ✅ Animação do título da hero section de eventos
+    const sectionTitles = document.querySelectorAll('.section-hero-title');
+    if (sectionTitles.length > 0) {
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
             });
-        }
-    });
+        }, { threshold: 0.4 });
+        sectionTitles.forEach(title => titleObserver.observe(title));
+    }
+
+    // ✅ Tela de carregamento — remove sempre (eventos não é a primeira página)
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) loadingScreen.remove();
 
     // ✅ Adiciona sombra à navbar ao descer a página
     const navbar = document.querySelector('.navbar');

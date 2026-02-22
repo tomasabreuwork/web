@@ -23,12 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Rolagem suave para as âncoras da navbar
-    document.querySelectorAll('nav ul li a').forEach(anchor => {
+    document.querySelectorAll('.navbar-list a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-
-            // Só faz scroll suave se for uma âncora interna (#)
-            // Se for link para outra página (.html), deixa navegar normalmente
             if (href && href.startsWith('#')) {
                 e.preventDefault();
                 const target = document.querySelector(href);
@@ -39,9 +36,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Adiciona sombra à navbar ao descer a página
+    // Adiciona sombra à navbar ao descer + active link no scroll
     const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.navbar-list a');
+    const sections = document.querySelectorAll('section[id]');
     const scrollThreshold = 50;
+
+    const updateActiveLink = () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href === `#${current}` ||
+                (current === 'experiencia' && href === '#experiencia-titulo') ||
+                (current === 'artigos' && href === '#artigos-titulo') ||
+                (current === 'contactos' && href === '#contactos-titulo')) {
+                link.classList.add('active');
+            }
+        });
+    };
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > scrollThreshold) {
@@ -49,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             navbar.classList.remove('navbar-shadow');
         }
+        updateActiveLink();
     });
 
     // Troca o vídeo de fundo para mobile
@@ -200,73 +221,72 @@ document.addEventListener('DOMContentLoaded', () => {
         contactosObserver.observe(contactosSection);
     }
 
-    // Tela de carregamento com frase motivadora e barra de progresso
-    const quotes = [
-        { text: "O sucesso é a soma de pequenos esforços repetidos dia após dia.", author: "Robert Collier" },
-        { text: "A disciplina é a ponte entre os objetivos e as conquistas.", author: "Jim Rohn" },
-        { text: "Não tenhas medo de desistir do bom para perseguir o excelente.", author: "John D. Rockefeller" },
-        { text: "O único modo de fazer um grande trabalho é amar o que fazes.", author: "Steve Jobs" },
-        { text: "A coragem não é a ausência do medo, mas a decisão de que algo é mais importante.", author: "Ambrose Redmoon" }
-    ];
+    // Tela de carregamento — apenas na primeira visita da sessão
+    const loadingScreen = document.getElementById('loading-screen');
+    const hasVisited = sessionStorage.getItem('site_visited');
 
-    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    const quoteTextEl = document.getElementById('loading-quote-text');
-    const quoteAuthorEl = document.getElementById('loading-quote-author');
-    if (quoteTextEl) quoteTextEl.textContent = `"${randomQuote.text}"`;
-    if (quoteAuthorEl) quoteAuthorEl.textContent = `— ${randomQuote.author}`;
+    if (loadingScreen && !hasVisited) {
+        // Marca a sessão como visitada
+        sessionStorage.setItem('site_visited', '1');
 
-    const fill = document.getElementById('loading-fill');
-    const percentEl = document.getElementById('loading-percent');
-    const progressBar = document.querySelector('.loading-progress-bar');
-    const enterBtn = document.getElementById('btn-enter-site');
-    let progress = 0;
+        const quotes = [
+            { text: "O sucesso é a soma de pequenos esforços repetidos dia após dia.", author: "Robert Collier" },
+            { text: "A disciplina é a ponte entre os objetivos e as conquistas.", author: "Jim Rohn" },
+            { text: "Não tenhas medo de desistir do bom para perseguir o excelente.", author: "John D. Rockefeller" },
+            { text: "O único modo de fazer um grande trabalho é amar o que fazes.", author: "Steve Jobs" },
+            { text: "A coragem não é a ausência do medo, mas a decisão de que algo é mais importante.", author: "Ambrose Redmoon" }
+        ];
 
-    const progressInterval = setInterval(() => {
-        const step = progress < 70 ? Math.random() * 8 + 3 : Math.random() * 2 + 0.5;
-        progress = Math.min(progress + step, 92);
-        if (fill) fill.style.width = progress + '%';
-        if (percentEl) percentEl.textContent = Math.floor(progress) + '%';
-    }, 120);
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        const quoteTextEl = document.getElementById('loading-quote-text');
+        const quoteAuthorEl = document.getElementById('loading-quote-author');
+        if (quoteTextEl) quoteTextEl.textContent = `"${randomQuote.text}"`;
+        if (quoteAuthorEl) quoteAuthorEl.textContent = `— ${randomQuote.author}`;
 
-    window.addEventListener('load', () => {
-        clearInterval(progressInterval);
+        const fill = document.getElementById('loading-fill');
+        const percentEl = document.getElementById('loading-percent');
+        const progressBar = document.querySelector('.loading-progress-bar');
+        const enterBtn = document.getElementById('btn-enter-site');
+        let progress = 0;
 
-        // Completa a barra para 100%
-        if (fill) fill.style.width = '100%';
-        if (percentEl) percentEl.textContent = '100%';
+        const progressInterval = setInterval(() => {
+            const step = progress < 70 ? Math.random() * 8 + 3 : Math.random() * 2 + 0.5;
+            progress = Math.min(progress + step, 92);
+            if (fill) fill.style.width = progress + '%';
+            if (percentEl) percentEl.textContent = Math.floor(progress) + '%';
+        }, 120);
 
-        // Após 600ms substitui a barra pelo botão
-        setTimeout(() => {
-            if (progressBar) progressBar.style.opacity = '0';
-            if (percentEl) percentEl.style.opacity = '0';
+        window.addEventListener('load', () => {
+            clearInterval(progressInterval);
+            if (fill) fill.style.width = '100%';
+            if (percentEl) percentEl.textContent = '100%';
 
             setTimeout(() => {
-                if (progressBar) progressBar.style.display = 'none';
-                if (percentEl) percentEl.style.display = 'none';
-                if (enterBtn) {
-                    enterBtn.style.display = 'block';
-                    // Força reflow para a transição funcionar
-                    enterBtn.getBoundingClientRect();
-                    enterBtn.classList.add('visible');
-                }
-            }, 400);
-        }, 600);
-    });
+                if (progressBar) progressBar.style.opacity = '0';
+                if (percentEl) percentEl.style.opacity = '0';
 
-    // Fechar a loading screen ao clicar no botão — cortinas a abrir para os lados
-    if (enterBtn) {
-        enterBtn.addEventListener('click', () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (!loadingScreen) return;
-
-            // Inicia a animação — conteúdo faz fade e cortinas abrem
-            loadingScreen.classList.add('exit');
-
-            // Remove o elemento depois da animação terminar (2.2s das cortinas)
-            setTimeout(() => {
-                loadingScreen.remove();
-            }, 2300);
+                setTimeout(() => {
+                    if (progressBar) progressBar.style.display = 'none';
+                    if (percentEl) percentEl.style.display = 'none';
+                    if (enterBtn) {
+                        enterBtn.style.display = 'block';
+                        enterBtn.getBoundingClientRect();
+                        enterBtn.classList.add('visible');
+                    }
+                }, 400);
+            }, 600);
         });
+
+        if (enterBtn) {
+            enterBtn.addEventListener('click', () => {
+                loadingScreen.classList.add('exit');
+                setTimeout(() => loadingScreen.remove(), 2300);
+            });
+        }
+
+    } else if (loadingScreen) {
+        // Já visitou — remove instantaneamente sem animação
+        loadingScreen.remove();
     }
 
     // Animação dos títulos das sections separadoras

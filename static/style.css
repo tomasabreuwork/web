@@ -48,7 +48,7 @@ body {
 header {
     width: 100%;
     position: fixed;
-    top: 30px;
+    top: 24px;
     left: 0;
     z-index: 1000;
     display: flex;
@@ -57,48 +57,61 @@ header {
 }
 
 .navbar {
-    width: 55%;
-    background: transparent;
-    padding: 1rem 0;
-    transition: box-shadow 0.4s ease-out, background-color 0.4s ease-out, border-radius 0.4s ease-out; /* Transições mais suaves */
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 8px;
+    height: 52px;
+    background: rgba(7, 7, 7, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
     position: relative;
     z-index: 1001;
-    border-radius: 0; /* Inicia sem border-radius */
+    width: auto;
+    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Esta regra aplicará a sombra e o fundo à largura de 55% da navbar */
 .navbar-shadow {
-    box-shadow: var(--navbar-scrolled-shadow); /* Usa a nova variável de sombra */
-    background-color: var(--navbar-scrolled-bg); /* Usa a nova variável de fundo */
-    border-radius: 10px; /* Arredonda as bordas quando a sombra aparece */
-    backdrop-filter: blur(5px); /* Efeito de desfoque (Blur) para um visual moderno */
-    -webkit-backdrop-filter: blur(5px); /* Suporte para navegadores Webkit */
+    background: rgba(7, 7, 7, 0.72);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
 }
 
-.navbar ul {
+/* Listas laterais */
+.navbar-list {
     list-style: none;
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
 }
 
-.navbar ul li a {
-    color: var(--text-color);
+/* Links */
+.navbar-list li a {
+    color: rgba(255, 255, 255, 0.55);
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-    font-size: 1.3em;
-    font-weight: 400;
+    padding: 7px 16px;
+    font-size: 0.82em;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
     display: inline-block;
+    border-radius: 100px;
+    transition: color 0.3s ease, background 0.3s ease;
+    white-space: nowrap;
 }
 
-.navbar ul li a:hover {
-    color: var(--hover-text-color);
-    text-shadow: 0 0 5px var(--hover-glow-color),
-                 0 0 10px var(--hover-glow-color),
-                 0 0 15px var(--hover-glow-color);
-    background: transparent;
-    border-radius: 0;
+.navbar-list li a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.navbar-list li a.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .hero-video {

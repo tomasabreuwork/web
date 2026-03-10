@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const quoteTextEl = document.getElementById('loading-quote-text');
         const quoteAuthorEl = document.getElementById('loading-quote-author');
         if (quoteTextEl) quoteTextEl.textContent = `"${randomQuote.text}"`;
-        if (quoteAuthorEl) quoteAuthorEl.textContent = `— ${randomQuote.author}`;
+        if (quoteAuthorEl) quoteAuthorEl.textContent = ` ${randomQuote.author}`;
 
         const fill = document.getElementById('loading-fill');
         const percentEl = document.getElementById('loading-percent');

@@ -1,3 +1,6 @@
+// Respeita a preferência de movimento reduzido do sistema operativo
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.addEventListener('DOMContentLoaded', () => {
     // ============================
     // HAMBURGER MENU MOBILE
@@ -9,7 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('open');
             mobileMenu.classList.toggle('open');
-            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+            const isOpen = mobileMenu.classList.contains('open');
+            hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
         // Fechar ao clicar num link
@@ -17,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('open');
                 mobileMenu.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
         });
@@ -72,11 +78,22 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActiveLink();
     });
 
-    // Troca o vídeo de fundo para mobile
+    // Vídeo de fundo da hero: fonte adequada + fade-in suave (evita o "salto" inicial)
     const heroVideo = document.querySelector('.hero-video video');
-    if (heroVideo && window.innerWidth <= 767) {
-        heroVideo.querySelector('source').setAttribute('src', '../static/videos/background_mobile.mp4');
-        heroVideo.load();
+    if (heroVideo) {
+        if (window.innerWidth <= 767) {
+            heroVideo.querySelector('source').setAttribute('src', '../static/videos/background_mobile.mp4');
+            heroVideo.load();
+        }
+        const showVideo = () => heroVideo.classList.add('ready');
+        if (heroVideo.readyState >= 3) {
+            showVideo();
+        } else {
+            heroVideo.addEventListener('canplay', showVideo, { once: true });
+            heroVideo.addEventListener('loadeddata', showVideo, { once: true });
+        }
+        // Garantia: mostra sempre, mesmo que os eventos não disparem
+        setTimeout(showVideo, 1500);
     }
 
     // Animação da secção "Sobre Mim"
@@ -167,60 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
         artigosObserver.observe(artigosSection);
     }
 
-    // Animação da secção Certificados
-    const certificadosSection = document.querySelector('.certificados-section');
-    const certLogoCards = document.querySelectorAll('.cert-logo-card');
-
-    if (certificadosSection && certLogoCards.length > 0) {
-        const certificadosObserverOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: window.innerWidth <= 767 ? 0.2 : 0.5
-        };
-
-        const certificadosObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    certLogoCards.forEach((card, index) => {
-                        card.style.transitionDelay = window.innerWidth <= 767 ? '0s' : `${index * 0.07}s`;
-                        card.classList.add('cert-logo-animate');
-                    });
-                } else {
-                    certLogoCards.forEach(card => {
-                        card.classList.remove('cert-logo-animate');
-                        card.style.transitionDelay = '0s';
-                    });
-                }
-            });
-        }, certificadosObserverOptions);
-
-        certificadosObserver.observe(certificadosSection);
-    }
-
-    // Animação de Contactos
-    const contactosSection = document.querySelector('.contactos-section');
-    const contactosContent = document.querySelector('.contactos-content');
-
-    if (contactosSection && contactosContent) {
-        const contactosObserverOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: window.innerWidth <= 767 ? 0.2 : 0.6
-        };
-
-        const contactosObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    contactosContent.classList.add('active');
-                } else {
-                    contactosContent.classList.remove('active');
-                }
-            });
-        }, contactosObserverOptions);
-
-        contactosObserver.observe(contactosSection);
-    }
-
     // Tela de carregamento — apenas na primeira visita da sessão
     const loadingScreen = document.getElementById('loading-screen');
     const hasVisited = sessionStorage.getItem('site_visited');
@@ -305,70 +268,85 @@ document.addEventListener('DOMContentLoaded', () => {
         sectionTitles.forEach(title => titleObserver.observe(title));
     }
 
-    // Partículas de fundo
-    document.querySelectorAll('.background-particles').forEach(createParticleCanvas);
-
-    // Lógica de troca entre logotipos e cursos
-    const logosView = document.getElementById("logos-view");
-    const coursesView = document.getElementById("courses-view");
-    const companyTitle = document.getElementById("company-title");
-    const coursesList = document.getElementById("courses-list");
-    const backButton = document.querySelector(".back-button");
-
-    const coursesData = {
-        cisco: [
-            { nome: "Cyber Threat Management", horas: "20h", descricao: "Gestão de ameaças e resposta a incidentes." }
-        ],
-        fiap: [
-            { nome: "Cibersecurity", horas: "40h", descricao: "Fundamentos de proteção digital e redes." },
-            { nome: "DevOps & Agile Culture", horas: "30h", descricao: "Automatização e metodologias ágeis." },
-            { nome: "IA e Computacional", horas: "35h", descricao: "Machine Learning e redes neuronais." }
-        ],
-        udemy: [
-            { nome: "Cyber Threat Intelligence", horas: "22h", descricao: "Estruturas de inteligência e OSINT." }
-        ]
-    };
-
-    document.querySelectorAll(".cert-logo-card").forEach(card => {
-        card.addEventListener("click", () => {
-            const company = card.dataset.company;
-            if (logosView) logosView.classList.add("hidden");
-            if (coursesView) coursesView.classList.remove("hidden");
-            if (companyTitle) companyTitle.textContent = company.toUpperCase();
-
-            if (coursesList && coursesData[company]) {
-                coursesList.innerHTML = coursesData[company]
-                    .map(course => `
-                        <div class="course-item">
-                            <h4>${course.nome}</h4>
-                            <p><strong>Horas:</strong> ${course.horas}</p>
-                            <p>${course.descricao}</p>
-                        </div>
-                    `).join("");
-            }
-        });
-    });
-
-    backButton?.addEventListener("click", () => {
-        if (coursesView) coursesView.classList.add("hidden");
-        if (logosView) logosView.classList.remove("hidden");
-    });
+    // Partículas de fundo (desativadas com movimento reduzido)
+    if (!prefersReducedMotion) {
+        document.querySelectorAll('.background-particles').forEach(createParticleCanvas);
+    }
 
     // FAQ Toggle
     document.querySelectorAll('.faq-question').forEach(button => {
         button.addEventListener('click', () => {
             const faqItem = button.parentElement;
-            faqItem.classList.toggle('active');
+            const isActive = faqItem.classList.toggle('active');
+            button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
 
             const answer = faqItem.querySelector('.faq-answer');
-            answer.style.maxHeight = faqItem.classList.contains('active')
+            answer.style.maxHeight = isActive
                 ? answer.scrollHeight + "px"
                 : null;
         });
     });
 
+    // Revelação suave do título da hero
+    const heroTitleEl = document.querySelector('.hero-title');
+    if (heroTitleEl && !prefersReducedMotion) {
+        const runReveal = () => revealTitle(heroTitleEl);
+        const ls = document.getElementById('loading-screen');
+        const enterBtnEl = document.getElementById('btn-enter-site');
+
+        if (ls && enterBtnEl) {
+            // Primeira visita: arranca quando o utilizador entra no site
+            enterBtnEl.addEventListener('click', () => setTimeout(runReveal, 900));
+        } else {
+            // Visita repetida (sem loading screen): arranca de imediato
+            runReveal();
+        }
+    }
+
+    // Subtítulo rotativo da hero (respeita o idioma escolhido)
+    const roleEl = document.querySelector('.hero-subtitle .role');
+    if (roleEl) {
+        const rolesByLang = {
+            pt: ['Cibersegurança', 'Cyber Threat Intelligence', 'Ciberdefesa'],
+            en: ['Cybersecurity', 'Cyber Threat Intelligence', 'Cyber Defence'],
+            es: ['Ciberseguridad', 'Cyber Threat Intelligence', 'Ciberdefensa'],
+            fr: ['Cybersécurité', 'Cyber Threat Intelligence', 'Cyberdéfense'],
+        };
+        const getRoles = () => rolesByLang[localStorage.getItem('lang') || 'pt'] || rolesByLang.pt;
+        let roleIdx = 0;
+        roleEl.textContent = getRoles()[0];
+
+        if (!prefersReducedMotion) {
+            setInterval(() => {
+                roleEl.classList.add('fading');
+                setTimeout(() => {
+                    roleIdx++;
+                    const roles = getRoles();
+                    roleEl.textContent = roles[roleIdx % roles.length];
+                    roleEl.classList.remove('fading');
+                }, 400);
+            }, 3200);
+        }
+    }
+
 });
 
+
+// Revelação suave do título: cada letra faz fade + desfoca->foca + sobe ligeiramente
+function revealTitle(el) {
+    const text = el.textContent;
+    el.textContent = '';
+    [...text].forEach((ch, i) => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = ch === ' ' ? ' ' : ch;
+        span.style.transitionDelay = `${i * 0.06}s`;
+        el.appendChild(span);
+    });
+    // Força reflow e ativa a transição
+    el.getBoundingClientRect();
+    requestAnimationFrame(() => el.classList.add('reveal'));
+}
 
 function createParticleCanvas(canvas) {
     const ctx = canvas.getContext('2d');

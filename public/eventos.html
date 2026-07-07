@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos - Tomás Abreu</title>
+    <link rel="icon" type="image/png" href="../static/images/icon.png">
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="../static/eventos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -14,7 +15,7 @@
     </div>
 
     <!-- Hamburger Menu Mobile -->
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -56,6 +57,18 @@
         <canvas class="background-particles"></canvas>
         <div class="eventos-container">
             <div class="eventos-grid">
+                <!-- Evento CWIX -->
+                <div class="evento-card">
+                    <div class="evento-image">
+                        <img src="../static/images/cwix2026.jpg" alt="CWIX 2026 - Service Desk">
+                    </div>
+                    <div class="evento-info">
+                        <h3>CWIX 2026 - Service Desk</h3>
+                        <p class="evento-data"><i class="far fa-calendar-alt" aria-hidden="true"></i>6 a 27 de junho, 2026</p>
+                        <p class="evento-descricao">Tive a honra de integrar a equipa de Service Desk no CWIX 2026, o maior exercício de interoperabilidade da NATO. Ao longo de três semanas assegurei o apoio técnico e a resolução de incidentes, garantindo o funcionamento contínuo dos sistemas e a cooperação entre as várias nações participantes.</p>
+                    </div>
+                </div>
+
                 <!-- Evento 1 -->
                 <div class="evento-card">
                     <div class="evento-image">
@@ -63,19 +76,19 @@
                     </div>
                     <div class="evento-info">
                         <h3>V2CN 2026</h3>
-                        <p class="evento-data"><i class="far fa-calendar-alt"></i>8 a 11 de Fevereiro, 2026</p>
-                        <p class="evento-descricao">Foi com grande orgulho que tive a oportunidade de representar portugal desta vez no exercicio V2CN, em Madrid, Espanha. </p>
+                        <p class="evento-data"><i class="far fa-calendar-alt" aria-hidden="true"></i>8 a 11 de Fevereiro, 2026</p>
+                        <p class="evento-descricao">Foi com grande orgulho que tive a oportunidade de representar Portugal desta vez no exercício V2CN, em Madrid, Espanha.</p>
                     </div>
                 </div>
 
                 <!-- Evento 2 -->
                 <div class="evento-card">
                     <div class="evento-image">
-                        <img src="../static/images/cc2025.png" alt="Workshop de Python para DevSecOps">
+                        <img src="../static/images/cc2025.png" alt="NATO Cyber Coalition 2025">
                     </div>
                     <div class="evento-info">
                         <h3>NATO Cyber Coalition 2025</h3>
-                        <p class="evento-data"><i class="far fa-calendar-alt"></i>28 de novembro a 4 de dezembro, 2025</p>
+                        <p class="evento-data"><i class="far fa-calendar-alt" aria-hidden="true"></i>28 de novembro a 4 de dezembro, 2025</p>
                         <p class="evento-descricao">Orgulhoso por ter participado no exercício NATO Cyber Coalition 2025, contribuindo para o reforço da cooperação internacional e da resiliência em ciberdefesa. Uma experiência exigente e extremamente enriquecedora.</p>
                     </div>
                 </div>
@@ -87,10 +100,11 @@
                     </div>
                     <div class="evento-info">
                         <h3>NATO Locked Shields 2024</h3>
-                        <p class="evento-data"><i class="far fa-calendar-alt"></i>23 a 26 de abril, 2024</p>
+                        <p class="evento-data"><i class="far fa-calendar-alt" aria-hidden="true"></i>23 a 26 de abril, 2024</p>
                         <p class="evento-descricao">Participei, a partir de Portugal, no Locked Shields 2024, o maior exercício internacional de ciberdefesa organizado pelo NATO Cooperative Cyber Defence Centre of Excellence, reforçando competências de defesa, coordenação e resposta a incidentes em ambiente de alta pressão.</p>
                     </div>
                 </div>
+            </div>
         </div>
     </section>
     <script src="../static/script.js"></script>

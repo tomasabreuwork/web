@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tomás Abreu</title>
-    <link rel="icon" type="image/ico" href="../static/images/icon.png">
+    <link rel="icon" type="image/png" href="../static/images/icon.png">
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -29,8 +29,7 @@
         </div>
     </div>
 
-    <!-- Hamburger Menu Mobile -->
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -58,13 +57,13 @@
     </header>
 
     <section id="inicio" class="hero-video">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline preload="auto">
             <source src="../static/videos/background.mp4" type="video/mp4">
             O seu navegador não suporta vídeos HTML5.
         </video>
         <div class="hero-text">
-            <h1 class="hero-title">Tomás Abreu</h1>
-            <p class="hero-subtitle">Cybersecurity</p>
+            <h1 class="hero-title" aria-label="Tomás Abreu">Tomás Abreu</h1>
+            <p class="hero-subtitle"><span class="role">Cybersecurity</span></p>
         </div>
     </section>
 
@@ -202,27 +201,27 @@
             <div class="contactos-faq">
                 <p class="contactos-label">Perguntas Frequentes</p>
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span>Aconselho a Via Militar?</span>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-plus" aria-hidden="true"></i>
                     </button>
                     <div class="faq-answer">
                         <p>Na minha opinião, todos os jovens deveriam considerar esta possibilidade. Fazer parte das forças armadas vai muito além do que a maioria das pessoas conhece — se tiveres alguma dúvida, podes entrar em contacto comigo!</p>
                     </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span>Porquê a Força Aérea Portuguesa?</span>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-plus" aria-hidden="true"></i>
                     </button>
                     <div class="faq-answer">
                         <p>Quando finalizei o meu ensino secundário descobri que a Força Aérea Portuguesa disponibilizou vagas para a especialidade de Operador de Ciberdefesa. Como sempre tive interesse em alistar-me nas Forças Armadas e na vertente da cibersegurança, olhei para esta oportunidade como algo transformador para a minha vida pessoal e profissional.</p>
                     </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">
+                    <button class="faq-question" aria-expanded="false">
                         <span>A Cibersegurança "é o futuro"?</span>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-plus" aria-hidden="true"></i>
                     </button>
                     <div class="faq-answer">
                         <p>Com a rapidez que o mundo está a evoluir, a preocupação de garantir a credibilidade de informação e veracidade de dados torna-se cada vez maior — e é por isso que a cibersegurança é cada vez mais essencial.</p>

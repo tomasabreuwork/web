@@ -235,9 +235,12 @@ const translationsEventos = {
         nav_eventos: "Eventos",
         nav_contactos: "Contactos",
         section_eventos: "Eventos",
+        ev4_title: "CWIX 2026 - Service Desk",
+        ev4_date: "6 a 27 de junho, 2026",
+        ev4_desc: "Tive a honra de integrar a equipa de Service Desk no CWIX 2026, o maior exercício de interoperabilidade da NATO. Ao longo de três semanas assegurei o apoio técnico e a resolução de incidentes, garantindo o funcionamento contínuo dos sistemas e a cooperação entre as várias nações participantes.",
         ev1_title: "V2CN 2026",
         ev1_date: "8 a 11 de Fevereiro, 2026",
-        ev1_desc: "Foi com grande orgulho que tive a oportunidade de representar portugal desta vez no exercicio V2CN, em Madrid, Espanha.",
+        ev1_desc: "Foi com grande orgulho que tive a oportunidade de representar Portugal desta vez no exercício V2CN, em Madrid, Espanha.",
         ev2_title: "NATO Cyber Coalition 2025",
         ev2_date: "28 de novembro a 4 de dezembro, 2025",
         ev2_desc: "Orgulhoso por ter participado no exercício NATO Cyber Coalition 2025, contribuindo para o reforço da cooperação internacional e da resiliência em ciberdefesa. Uma experiência exigente e extremamente enriquecedora.",
@@ -253,6 +256,9 @@ const translationsEventos = {
         nav_eventos: "Events",
         nav_contactos: "Contacts",
         section_eventos: "Events",
+        ev4_title: "CWIX 2026 - Service Desk",
+        ev4_date: "6 to 27 June, 2026",
+        ev4_desc: "I had the honour of joining the Service Desk team at CWIX 2026, NATO's largest interoperability exercise. Over three weeks I provided technical support and incident resolution, ensuring the continuous operation of the systems and cooperation between the various participating nations.",
         ev1_title: "V2CN 2026",
         ev1_date: "8 to 11 February, 2026",
         ev1_desc: "It was with great pride that I had the opportunity to represent Portugal this time at the V2CN exercise, in Madrid, Spain.",
@@ -271,6 +277,9 @@ const translationsEventos = {
         nav_eventos: "Eventos",
         nav_contactos: "Contactos",
         section_eventos: "Eventos",
+        ev4_title: "CWIX 2026 - Service Desk",
+        ev4_date: "6 al 27 de junio, 2026",
+        ev4_desc: "Tuve el honor de integrar el equipo de Service Desk en el CWIX 2026, el mayor ejercicio de interoperabilidad de la OTAN. Durante tres semanas aseguré el soporte técnico y la resolución de incidentes, garantizando el funcionamiento continuo de los sistemas y la cooperación entre las diversas naciones participantes.",
         ev1_title: "V2CN 2026",
         ev1_date: "8 al 11 de febrero, 2026",
         ev1_desc: "Fue con gran orgullo que tuve la oportunidad de representar a Portugal esta vez en el ejercicio V2CN, en Madrid, España.",
@@ -289,6 +298,9 @@ const translationsEventos = {
         nav_eventos: "Événements",
         nav_contactos: "Contacts",
         section_eventos: "Événements",
+        ev4_title: "CWIX 2026 - Service Desk",
+        ev4_date: "6 au 27 juin 2026",
+        ev4_desc: "J'ai eu l'honneur d'intégrer l'équipe Service Desk lors du CWIX 2026, le plus grand exercice d'interopérabilité de l'OTAN. Pendant trois semaines, j'ai assuré le support technique et la résolution des incidents, garantissant le fonctionnement continu des systèmes et la coopération entre les différentes nations participantes.",
         ev1_title: "V2CN 2026",
         ev1_date: "8 au 11 février 2026",
         ev1_desc: "C'est avec une grande fierté que j'ai eu l'opportunité de représenter le Portugal cette fois-ci lors de l'exercice V2CN, à Madrid, Espagne.",
@@ -351,9 +363,7 @@ const translationsEventos = {
             document.querySelectorAll('.navbar-list a[href="eventos.html"], .mobile-menu-overlay a[href="eventos.html"]').forEach(el => el.textContent = tr.nav_eventos);
             document.querySelectorAll('.navbar-list a[href="#contactos-titulo"], .mobile-menu-overlay a[href="#contactos-titulo"]').forEach(el => el.textContent = tr.nav_contactos);
 
-            // Hero subtitle
-            const heroSub = document.querySelector('.hero-subtitle');
-            if (heroSub) heroSub.textContent = tr.hero_subtitle;
+            // O subtítulo da hero é gerido pela rotação no script.js (i18n incluída)
 
             // Sobre
             const aboutH2 = document.querySelector('.about-text h2');
@@ -457,6 +467,7 @@ const translationsEventos = {
             // Event cards
             const cards = document.querySelectorAll('.evento-card');
             const evData = [
+                { title: tr.ev4_title, date: tr.ev4_date, desc: tr.ev4_desc },
                 { title: tr.ev1_title, date: tr.ev1_date, desc: tr.ev1_desc },
                 { title: tr.ev2_title, date: tr.ev2_date, desc: tr.ev2_desc },
                 { title: tr.ev3_title, date: tr.ev3_date, desc: tr.ev3_desc },
@@ -504,22 +515,26 @@ const translationsEventos = {
                     </button>
                 `).join('')}
             </div>
-            <button class="lang-current" aria-label="Mudar idioma">
+            <button class="lang-current" aria-label="Mudar idioma" aria-haspopup="true" aria-expanded="false">
                 <img src="${FLAGS[currentLang].src}" alt="${FLAGS[currentLang].alt}">
             </button>
         `;
 
         document.body.appendChild(switcher);
 
+        const currentBtn = switcher.querySelector('.lang-current');
+
         // Toggle open/close
-        switcher.querySelector('.lang-current').addEventListener('click', (e) => {
+        currentBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            switcher.classList.toggle('open');
+            const isOpen = switcher.classList.toggle('open');
+            currentBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
         // Close on outside click
         document.addEventListener('click', () => {
             switcher.classList.remove('open');
+            currentBtn.setAttribute('aria-expanded', 'false');
         });
 
         switcher.addEventListener('click', e => e.stopPropagation());
@@ -529,6 +544,7 @@ const translationsEventos = {
             btn.addEventListener('click', () => {
                 const lang = btn.dataset.lang;
                 switcher.classList.remove('open');
+                switcher.querySelector('.lang-current')?.setAttribute('aria-expanded', 'false');
 
                 // Rebuild options (exclude newly selected lang)
                 setLang(lang);
@@ -547,6 +563,7 @@ const translationsEventos = {
                     newBtn.addEventListener('click', () => {
                         const newLang = newBtn.dataset.lang;
                         switcher.classList.remove('open');
+                        switcher.querySelector('.lang-current')?.setAttribute('aria-expanded', 'false');
                         setLang(newLang);
                         rebuildOptions(switcher, newLang);
                     });
@@ -568,6 +585,7 @@ const translationsEventos = {
             btn.addEventListener('click', () => {
                 const lang = btn.dataset.lang;
                 switcher.classList.remove('open');
+                switcher.querySelector('.lang-current')?.setAttribute('aria-expanded', 'false');
                 setLang(lang);
                 rebuildOptions(switcher, lang);
             });

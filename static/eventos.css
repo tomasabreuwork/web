@@ -93,9 +93,9 @@
 /* ============================== */
 
 .evento-card {
-    background: var(--box-background);
-    border: 1px solid var(--box-border);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.022);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
     overflow: hidden;
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
                 box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1),

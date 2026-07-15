@@ -294,9 +294,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const ls = document.getElementById('loading-screen');
         const enterBtnEl = document.getElementById('btn-enter-site');
 
+        const heroSubtitleEl = document.querySelector('.hero-subtitle');
+
         if (ls && enterBtnEl) {
-            // Primeira visita: arranca quando o utilizador entra no site
-            enterBtnEl.addEventListener('click', () => setTimeout(runReveal, 900));
+            // Primeira visita: mantém título e subtítulo totalmente escondidos
+            // enquanto as cortinas abrem (senão o heroFadeIn do CSS mostra-os por
+            // detrás delas).
+            heroTitleEl.style.animation = 'none';
+            heroTitleEl.style.opacity = '0';
+            heroTitleEl.style.transform = 'none';
+
+            if (heroSubtitleEl) {
+                heroSubtitleEl.style.animation = 'none';
+                heroSubtitleEl.style.opacity = '0';
+                heroSubtitleEl.style.transform = 'translateY(12px)';
+                heroSubtitleEl.style.transition = 'opacity 1s ease, transform 1s cubic-bezier(0.23, 1, 0.32, 1)';
+            }
+
+            // Enquanto as cortinas ainda estão a abrir (transição de 2.2s em
+            // .loading-curtain), o título começa a revelar-se letra a letra,
+            // seguido do subtítulo.
+            enterBtnEl.addEventListener('click', () => setTimeout(() => {
+                heroTitleEl.style.opacity = '1';
+                runReveal();
+                if (heroSubtitleEl) {
+                    setTimeout(() => {
+                        heroSubtitleEl.style.opacity = '1';
+                        heroSubtitleEl.style.transform = 'translateY(0)';
+                    }, 600);
+                }
+            }, 1400));
         } else {
             // Visita repetida (sem loading screen): arranca de imediato
             runReveal();
@@ -307,10 +334,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const roleEl = document.querySelector('.hero-subtitle .role');
     if (roleEl) {
         const rolesByLang = {
-            pt: ['Cibersegurança', 'Cyber Threat Intelligence', 'Ciberdefesa'],
-            en: ['Cybersecurity', 'Cyber Threat Intelligence', 'Cyber Defence'],
-            es: ['Ciberseguridad', 'Cyber Threat Intelligence', 'Ciberdefensa'],
-            fr: ['Cybersécurité', 'Cyber Threat Intelligence', 'Cyberdéfense'],
+            pt: ['Cibersegurança', 'Threat Intelligence', 'UI/UX'],
+            en: ['Cybersecurity', 'Threat Intelligence', 'UI/UX'],
+            es: ['Ciberseguridad', 'Threat Intelligence', 'UI/UX'],
+            fr: ['Cybersécurité', 'Threat Intelligence', 'UI/UX'],
         };
         const getRoles = () => rolesByLang[localStorage.getItem('lang') || 'pt'] || rolesByLang.pt;
         let roleIdx = 0;
